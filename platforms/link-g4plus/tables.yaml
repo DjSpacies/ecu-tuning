@@ -1,0 +1,105 @@
+# Native table or parameter -> role. evidence: vendor-doc (help file 5.6.8) | re-derived (RE project) | sample-observed.
+# None is verified against the user's own files. Rows are y, columns x; trailing unused axis zones are trimmed by the adapter.
+version: 1
+tables:
+  - id: 2365
+    native: Fuel Table 1
+    role: ve
+    x_labels: 3074
+    y_labels: 3075
+    unit: "%"
+    evidence: re-derived, vendor-doc
+    note: VE only in Modelled modes; in Traditional the numbers also include other constants
+  - id: 2366
+    native: Ignition Table 1
+    role: ign_base
+    x_labels: 1415
+    y_labels: 1416
+    unit: deg BTDC
+    evidence: re-derived, vendor-doc
+  - id: 3890
+    native: AFR/Lambda Target Table
+    role: lambda_target
+    x_labels: 3880
+    y_labels: 3881
+    unit: lambda
+    evidence: re-derived, vendor-doc
+    note: Optional in Traditional mode
+  - id: 2367
+    native: Fuel Table 2
+    role: ve_2
+    x_labels: 2881
+    y_labels: 2882
+    unit: "%"
+    evidence: re-derived
+  - id: 2368
+    native: Ignition Table 2
+    role: ign_base_2
+    x_labels: 2879
+    y_labels: 2880
+    unit: deg BTDC
+    evidence: re-derived
+  - id: 3891
+    native: AFR/Lambda Target Table 2
+    role: lambda_target_2
+    x_labels: 3892
+    y_labels: 3893
+    unit: lambda
+    evidence: re-derived
+arrays:
+  - id: 2987
+    name: injector_dead_time_ms
+    evidence: re-derived
+    note: One row of ten values; the axis is battery voltage per the help
+  - id: 2997
+    name: short_pulse_adder_ms
+    evidence: re-derived
+  - id: 2872
+    name: crank_enrichment_pct
+    evidence: re-derived
+  - id: 2873
+    name: post_start_enrichment_pct
+    evidence: re-derived
+  - id: 1802
+    name: iat_trim_pct
+    evidence: re-derived
+  - id: 1803
+    name: ect_trim_pct
+    evidence: re-derived
+  - id: 1623
+    name: rpm_limit
+    evidence: re-derived, sample-observed
+    note: Limit against a temperature axis in the samples, lower when cold
+  - id: 1624
+    name: map_limit_kpa
+    evidence: re-derived, sample-observed
+scalars:
+  - id: 3737
+    native: Fuel Equation Mode
+    name: fuel_equation_mode
+    evidence: re-derived, sample-observed
+    note: 0 Traditional, 1 Modelled, 2 Modelled - Multi Fuel, in the order of the help file; not confirmed on screen
+  - id: 3029
+    native: Master Fuel
+    name: master_fuel
+    evidence: re-derived
+  - id: 3002
+    native: Engine Capacity
+    name: engine_capacity_cc
+    evidence: re-derived
+  - id: 2868
+    native: Injector Flow at Rated Pressure
+    name: injector_flow_cc_min
+    evidence: re-derived
+  - id: 2841
+    native: Injector Rated Fuel Pressure
+    name: reference_fuel_pressure
+    evidence: re-derived
+  - id: 2876
+    native: Stoich Ratio
+    name: stoich_ratio
+    evidence: re-derived
+  - id: 2867
+    native: Fuel Density
+    name: fuel_density_g_cc
+    evidence: re-derived

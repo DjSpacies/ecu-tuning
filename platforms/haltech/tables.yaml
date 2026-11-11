@@ -1,0 +1,9 @@
+# Native table -> role, from the help. No tune parser yet; this records the meaning only.
+version: 1
+tables:
+  - native: Fuel Base (Volumetric Efficiency method)
+    role: ve
+    evidence: vendor-doc
+  - native: Target Lambda
+    role: lambda_target
+    evidence: vendor-doc

@@ -1,0 +1,25 @@
+# CSV column name -> canonical channel. Names are PLACEHOLDERS (evidence: assumed); confirm against a real export.
+version: 1
+channels:
+  - column: Engine Speed
+    canonical: rpm
+  - column: Manifold Pressure
+    canonical: map_kpa
+  - column: Barometric Pressure
+    canonical: baro_kpa
+  - column: Throttle Position
+    canonical: tps
+  - column: Coolant Temperature
+    canonical: ect
+  - column: Air Temperature
+    canonical: iat
+  - column: Lambda 1
+    canonical: lambda
+  - column: Ignition Angle
+    canonical: ign_adv
+  - column: Injector Duty Cycle
+    canonical: inj_duty
+  - column: Battery Voltage
+    canonical: battery_v
+  - column: Knock Level
+    canonical: knock_level

@@ -1,0 +1,649 @@
+# Canonical tuning vocabulary (brand-neutral). Schema: principles/glossary/README.md
+# `also` lists every name a source may use for the concept (generic and vendor-coined, never an ECU brand).
+# platforms/<ecu>/terms.yaml records which of these names each platform's own docs use.
+version: 1
+verified: 2026-11-08
+terms:
+  # ---- L0 quantities and units ----
+  - id: lambda
+    term: Lambda
+    abbr: [λ]
+    also: [lambda, equivalence air ratio, excess air ratio]
+    kind: quantity
+    layer: L0
+    channel: lambda
+    def: Actual air-fuel ratio divided by the stoichiometric ratio for the fuel in use; 1.0 is stoichiometric, below 1 is rich. Fuel-independent, so preferred over AFR.
+  - id: afr
+    term: Air-fuel ratio
+    abbr: [AFR]
+    also: [air fuel ratio, air/fuel ratio, air fuel, mixture ratio]
+    kind: quantity
+    layer: L0
+    def: Mass of air divided by mass of fuel. Only meaningful alongside the fuel's stoichiometric ratio; gasoline-scaled AFR on an ethanol blend misleads.
+  - id: stoich_afr
+    term: Stoichiometric air-fuel ratio
+    abbr: [stoich]
+    also: [stoichiometric, stoich ratio, stoichiometric ratio, stoich AFR]
+    kind: quantity
+    layer: L0
+    def: The AFR at which fuel and oxygen are exactly consumed. About 14.7 for gasoline, 9.0 for ethanol, 6.45 for methanol; blends interpolate by mass.
+  - id: equivalence_ratio
+    term: Equivalence ratio
+    abbr: [phi, φ]
+    also: [fuel-air equivalence ratio]
+    kind: quantity
+    layer: L0
+    def: The reciprocal of lambda (stoichiometric AFR over actual AFR); above 1 is rich. Common in combustion literature.
+  - id: volumetric_efficiency
+    term: Volumetric efficiency
+    abbr: [VE]
+    also: [volumetric efficiency, VE, breathing efficiency]
+    kind: quantity
+    layer: L1
+    def: Air mass actually trapped per cycle divided by the mass that would fill the swept volume at reference (usually manifold) density.
+  - id: map
+    term: Manifold absolute pressure
+    abbr: [MAP]
+    also: [manifold absolute pressure, manifold pressure, MAP]
+    kind: quantity
+    layer: L0
+    channel: map_kpa
+    def: Absolute pressure in the intake manifold, the main load signal in speed-density fuelling.
+  - id: gauge_pressure
+    term: Manifold gauge pressure
+    abbr: [MGP]
+    also: [manifold gauge pressure, MGP, boost pressure, boost]
+    kind: quantity
+    layer: L0
+    def: MAP minus barometric pressure; positive is boost, negative is vacuum.
+  - id: baro
+    term: Barometric pressure
+    abbr: [BAP]
+    also: [barometric pressure, baro, atmospheric pressure, ambient pressure]
+    kind: quantity
+    layer: L0
+    channel: baro_kpa
+    def: Ambient absolute pressure; needed for altitude correction and gauge-pressure targets.
+  - id: kpa
+    term: Kilopascal
+    abbr: [kPa]
+    also: [kPa, kilopascal]
+    kind: unit
+    layer: L0
+    def: SI pressure unit used internally by this skill; 100 kPa is about 1 bar, 6.895 kPa per psi.
+  - id: engine_speed
+    term: Engine speed
+    abbr: [RPM]
+    also: [engine speed, RPM, revs, engine RPM]
+    kind: quantity
+    layer: L0
+    channel: rpm
+    def: Crankshaft rotational speed in revolutions per minute.
+  - id: throttle_position
+    term: Throttle position
+    abbr: [TPS, TP]
+    also: [throttle position, TPS, TP, throttle angle, throttle]
+    kind: quantity
+    layer: L1
+    channel: tps
+    def: Throttle-blade opening, usually 0-100 %; the load axis in alpha-N fuelling.
+  - id: pedal_position
+    term: Accelerator pedal position
+    abbr: [APS, APP]
+    also: [accelerator pedal position, APS, APP, pedal position]
+    kind: quantity
+    layer: L1
+    def: Driver demand from the pedal on drive-by-wire systems; mapped to a throttle target.
+  - id: iat
+    term: Intake air temperature
+    abbr: [IAT, ACT, MAT]
+    also: [intake air temperature, intake air temp, IAT, air temp, ACT, MAT, manifold air temperature]
+    kind: quantity
+    layer: L1
+    channel: iat
+    def: Air temperature measured in the intake tract; used for air-density and knock compensation.
+  - id: ect
+    term: Engine coolant temperature
+    abbr: [ECT, CLT]
+    also: [engine coolant temperature, coolant temperature, coolant temp, ECT, CLT, engine temp]
+    kind: quantity
+    layer: L1
+    channel: ect
+    def: Coolant temperature; drives warm-up, cranking and idle compensations and protection.
+  - id: charge_temp
+    term: Charge temperature
+    also: [charge temperature, charge temp, estimated charge temperature, charge temp approximation]
+    kind: quantity
+    layer: L1
+    def: Estimated air temperature in the cylinder, blended between IAT and coolant by airflow; used in modelled fuel equations.
+  - id: egt
+    term: Exhaust gas temperature
+    abbr: [EGT]
+    also: [exhaust gas temperature, exhaust gas temp, EGT]
+    kind: quantity
+    layer: L1
+    def: Exhaust temperature from a thermocouple; reflects combustion phasing and mixture, used for protection.
+  - id: fuel_pressure
+    term: Fuel pressure
+    abbr: [FP]
+    also: [fuel pressure, rail pressure, fuel rail pressure]
+    kind: quantity
+    layer: L1
+    channel: fuel_pressure_kpa
+    def: Fuel rail pressure; injector flow depends on the pressure difference across the injector.
+  - id: differential_fuel_pressure
+    term: Differential fuel pressure
+    also: [differential fuel pressure, fuel pressure differential, delta fuel pressure, effective fuel pressure]
+    kind: quantity
+    layer: L1
+    def: Rail pressure minus manifold pressure; the pressure that actually drives injector flow.
+  - id: ignition_advance
+    term: Ignition advance
+    also: [ignition timing, ignition advance, spark advance, spark timing, timing, ignition angle, BTDC, ATDC]
+    kind: quantity
+    layer: L1
+    channel: ign_adv
+    def: Crank angle of spark before top dead centre (BTDC positive); sets combustion phasing.
+  - id: mbt
+    term: Minimum advance for best torque
+    abbr: [MBT]
+    also: [MBT, minimum advance for best torque, maximum brake torque, best torque timing]
+    kind: concept
+    layer: L1
+    def: The least ignition advance that gives peak torque at an operating point; more advance gains nothing and raises knock risk.
+  - id: knock
+    term: Knock
+    also: [knock, detonation, pinging, spark knock, pinking]
+    kind: concept
+    layer: L1
+    def: Autoignition of end-gas ahead of the flame, producing pressure oscillations that damage pistons and rings.
+  - id: pre_ignition
+    term: Pre-ignition
+    abbr: [LSPI]
+    also: [pre-ignition, preignition, low speed pre-ignition, LSPI]
+    kind: concept
+    layer: L1
+    def: Ignition of the charge before the spark, from hot spots or deposits; not controllable with spark retard.
+  - id: octane
+    term: Octane rating
+    abbr: [RON, MON, AKI]
+    also: [octane, octane rating, RON, MON, AKI, anti-knock index]
+    kind: quantity
+    layer: L0
+    def: Fuel resistance to autoignition under standard test conditions; RON milder, MON more severe, AKI the US pump average.
+  - id: octane_sensitivity
+    term: Octane sensitivity
+    also: [octane sensitivity, fuel sensitivity, RON minus MON]
+    kind: quantity
+    layer: L0
+    def: RON minus MON; high-sensitivity fuels (ethanol, aromatics) knock less in modern boosted engines than their AKI suggests.
+  - id: heat_of_vaporisation
+    term: Heat of vaporisation
+    abbr: [HoV]
+    also: [heat of vaporization, heat of vaporisation, latent heat, enthalpy of vaporization, charge cooling]
+    kind: quantity
+    layer: L0
+    def: Energy needed to evaporate fuel; far higher for methanol and ethanol than gasoline, cooling the charge and resisting knock.
+  - id: ethanol_content
+    term: Ethanol content
+    abbr: [E%]
+    also: [ethanol content, ethanol percentage, ethanol percent, flex content, alcohol content, E85, E10, E30]
+    kind: quantity
+    layer: L1
+    def: Volume fraction of ethanol in the fuel, read by a flex-fuel sensor and used to blend fuel and spark settings.
+  - id: methanol
+    term: Methanol
+    abbr: [M100]
+    also: [methanol, M100]
+    kind: concept
+    layer: L0
+    def: Single-carbon alcohol fuel; stoichiometric AFR about 6.45, very high heat of vaporisation, needs about 2.3 times the fuel mass of gasoline for the same air.
+
+  # ---- L1 fuel system ----
+  - id: injector_pulse_width
+    term: Injector pulse width
+    abbr: [PW, IPW]
+    also: [injector pulse width, pulse width, injection time, injector on time, effective pulse width, IPW, PW]
+    kind: quantity
+    layer: L1
+    channel: inj_pw
+    def: Time the injector is commanded open each injection, normally in ms; includes the dead time.
+  - id: injector_dead_time
+    term: Injector dead time
+    also: [injector dead time, dead time, injector latency, latency, injector offset, battery offset, opening time, deadtime]
+    kind: table
+    layer: L1
+    role: injector_dead_time
+    def: Part of the pulse during which the injector is not yet flowing, mostly dependent on battery voltage and fuel pressure; added to the effective pulse.
+  - id: short_pulse_adder
+    term: Short pulse width adder
+    also: [short pulse width adder, short pulse adder, small pulse width, short pulse width, small pulse adder, short pulse correction, SPA]
+    kind: table
+    layer: L1
+    role: injector_short_pulse
+    def: Correction for the non-linear flow of an injector at very short pulse widths, where flow is not proportional to time.
+  - id: injector_flow_rate
+    term: Injector flow rate
+    also: [injector flow rate, injector size, flow rate, static flow, cc/min, lb/hr, injector slope]
+    kind: quantity
+    layer: L1
+    def: Fuel flow of a fully open injector at a stated differential pressure (cc/min or lb/hr); scales fuel mass to time.
+  - id: injector_duty_cycle
+    term: Injector duty cycle
+    abbr: [IDC]
+    also: [injector duty cycle, injector duty, duty cycle, IDC]
+    kind: quantity
+    layer: L1
+    def: Fraction of the available engine-cycle time the injector is open; near 100 % it can no longer add fuel.
+  - id: injection_timing
+    term: Injection timing
+    also: [injection timing, end of injection, start of injection, EOI, SOI, injection angle, fuel timing]
+    kind: table
+    layer: L1
+    role: injection_timing
+    def: Crank angle at which injection ends (or starts); affects mixture preparation and emissions, especially at idle and on DI.
+  - id: staged_injection
+    term: Staged injection
+    also: [staged injection, secondary injectors, primary and secondary injectors, staging]
+    kind: strategy
+    layer: L1
+    def: Using a second set of injectors that start flowing above a load or flow threshold.
+  - id: direct_injection
+    term: Direct injection
+    abbr: [DI, GDI]
+    also: [direct injection, GDI, DI, gasoline direct injection]
+    kind: component
+    layer: L1
+    def: Fuel injected straight into the cylinder at high pressure, from a cam-driven high-pressure pump.
+  - id: port_injection
+    term: Port fuel injection
+    abbr: [PFI, MPI]
+    also: [port injection, port fuel injection, PFI, MPI, multi-point injection]
+    kind: component
+    layer: L1
+    def: Fuel injected into the intake port, upstream of the intake valve.
+  - id: overrun_fuel_cut
+    term: Overrun fuel cut
+    abbr: [DFCO]
+    also: [overrun fuel cut, overrun cut, deceleration fuel cut, decel fuel cut off, DFCO, fuel cut on overrun]
+    kind: strategy
+    layer: L1
+    def: Stopping injection on closed throttle above a speed threshold, with re-entry conditions to avoid a jerk.
+  - id: transient_fuel
+    term: Transient fuel compensation
+    also: [transient fuel, wall wetting, wall film, accel enrichment, acceleration enrichment, accel enrich, transient throttle enrichment, tip-in enrichment, accel/decel]
+    kind: strategy
+    layer: L1
+    def: Extra or reduced fuel during load changes to cover fuel film build-up and loss on port walls.
+  - id: cranking_fuel
+    term: Cranking fuel
+    also: [cranking fuel, cranking enrichment, cranking pulse width, crank fuel, cranking]
+    kind: table
+    layer: L1
+    role: cranking_fuel
+    def: Fuel delivered while the starter turns the engine, usually by coolant temperature.
+  - id: priming_pulse
+    term: Priming pulse
+    also: [priming pulse, prime pulse, fuel prime, primer pulse]
+    kind: table
+    layer: L1
+    def: One injection at key-on or first crank to wet the ports before cranking fuel takes over.
+  - id: post_start_enrichment
+    term: Post-start enrichment
+    also: [post start enrichment, post-start enrichment, post start, after start enrichment, afterstart, ASE]
+    kind: table
+    layer: L1
+    role: post_start_fuel
+    def: Extra fuel that decays over the first seconds or cycles after the engine starts.
+  - id: warm_up_enrichment
+    term: Warm-up enrichment
+    abbr: [WUE]
+    also: [warm up enrichment, warm-up enrichment, warmup enrichment, WUE, coolant temp correction, coolant fuel correction, ECT fuel correction]
+    kind: table
+    layer: L1
+    role: warmup_fuel
+    def: Coolant-temperature-based fuel added until the engine reaches operating temperature.
+
+  # ---- L1 fuel strategy and tables ----
+  - id: fuel_table
+    term: Main fuel table
+    also: [fuel table, main fuel table, base fuel table, VE table, fuel map, base fuel, fuel main, main fuel map, volumetric efficiency table]
+    kind: table
+    layer: L1
+    role: ve
+    def: The primary fuel calibration table; holds VE (modelled strategies) or pulse width or a fuel number (traditional strategies).
+  - id: fuel_model
+    term: Fuel equation mode
+    also: [fuel equation, fuel equation mode, fuel mode, fuelling strategy, fuel model, modelled, modeled, traditional, multi fuel, modelled multi fuel]
+    kind: strategy
+    layer: L1
+    def: How the ECU turns load into fuel. "Modelled" uses VE, air density and injector data; "traditional" scales a base pulse width.
+  - id: speed_density
+    term: Speed density
+    abbr: [SD]
+    also: [speed density, speed-density, MAP based fuelling]
+    kind: strategy
+    layer: L1
+    def: Air mass estimated from MAP, charge temperature, engine speed and VE.
+  - id: alpha_n
+    term: Alpha-N
+    also: [alpha-n, alpha n, alpha/n, throttle based fuelling, TPS based load]
+    kind: strategy
+    layer: L1
+    def: Load estimated from throttle angle and engine speed; used with ITBs or large cams where MAP is unsteady.
+  - id: maf_mode
+    term: Mass airflow metering
+    abbr: [MAF, AFM]
+    also: [mass air flow, mass airflow, MAF, airflow meter, air flow meter, AFM]
+    kind: strategy
+    layer: L1
+    def: Air mass measured directly by a hot-wire or hot-film sensor in the intake.
+  - id: load_axis
+    term: Load axis
+    also: [load, load axis, fuel load, load source, Y axis]
+    kind: concept
+    layer: L1
+    def: The table axis that stands in for engine load (MAP, TPS, MAF airflow or a blend).
+  - id: lambda_target
+    term: Lambda target table
+    also: [lambda target, target lambda, lambda target table, target AFR, AFR target, target air fuel, target table]
+    kind: table
+    layer: L1
+    role: lambda_target
+    def: Desired lambda by speed and load; used by the modelled fuel equation and by closed-loop correction.
+  - id: closed_loop_lambda
+    term: Closed-loop lambda control
+    abbr: [CLL, CL]
+    also: [closed loop lambda, closed loop, closed loop fuel, closed loop correction, lambda control, CLL, O2 feedback]
+    kind: strategy
+    layer: L1
+    def: Live trim of fuel from the measured lambda error against the target, within limits.
+  - id: open_loop
+    term: Open-loop fuelling
+    also: [open loop, open-loop, open loop fuel]
+    kind: strategy
+    layer: L1
+    def: Fuel delivered from tables alone with no feedback from the lambda sensor.
+  - id: fuel_trim
+    term: Fuel trim
+    abbr: [STFT, LTFT]
+    also: [fuel trim, fuel trims, short term trim, long term trim, STFT, LTFT, fuel correction, lambda correction]
+    kind: quantity
+    layer: L1
+    def: The percentage correction applied by closed-loop control (short term) or learnt and stored (long term).
+  - id: fuel_correction_iat
+    term: IAT fuel correction
+    also: [IAT fuel correction, IAT fuel trim, air temp fuel correction, air temperature correction]
+    kind: table
+    layer: L1
+    def: Fuel change with intake air temperature beyond what the air-density calculation already covers.
+
+  # ---- L1 ignition ----
+  - id: ignition_table
+    term: Main ignition table
+    also: [ignition table, ignition map, spark table, base timing table, ignition main, main ignition table, timing map, spark map, base ignition]
+    kind: table
+    layer: L1
+    role: ign_base
+    def: Base ignition advance by engine speed and load.
+  - id: ignition_trim
+    term: Ignition trim
+    also: [ignition trim, ignition correction, timing trim, spark trim, individual cylinder ignition trim, IAT ignition trim, ignition compensation]
+    kind: table
+    layer: L1
+    def: Additive advance or retard by cylinder or by a condition (IAT, coolant, ethanol content, gear).
+  - id: dwell
+    term: Dwell
+    also: [dwell, dwell time, coil dwell, coil charge time]
+    kind: table
+    layer: L1
+    role: dwell
+    def: Coil charge time before spark, by battery voltage; too short weakens the spark, too long overheats the coil.
+  - id: knock_control
+    term: Knock control
+    also: [knock control, knock detection, knock retard, knock threshold, knock target, knock window, knock gain, knock level]
+    kind: strategy
+    layer: L1
+    def: Filtering knock-sensor signals in a crank-angle window, comparing to a noise threshold, and retarding spark per cylinder.
+  - id: knock_sensor
+    term: Knock sensor
+    also: [knock sensor, det sensor, accelerometer, piezo knock sensor]
+    kind: component
+    layer: L1
+    def: Piezoelectric accelerometer on the block that picks up knock vibration.
+  - id: trigger
+    term: Trigger setup
+    also: [trigger, trigger setup, trigger pattern, crank trigger, cam trigger, trigger wheel, trigger offset, trigger angle, trigger scope, missing tooth, 36-1, 60-2, 12-1]
+    kind: strategy
+    layer: L1
+    def: How the ECU decodes crank and cam signals into engine position; the trigger offset aligns calculated TDC with actual TDC.
+  - id: crank_sensor
+    term: Crank position sensor
+    abbr: [CKP, CAS]
+    also: [crank sensor, crank angle sensor, crank position sensor, CKP, CAS]
+    kind: component
+    layer: L1
+    def: Sensor reading a toothed wheel on the crank; VR (magnetic, AC signal) or Hall (digital square wave).
+  - id: vr_hall
+    term: VR versus Hall sensor
+    abbr: [VR]
+    also: [VR, variable reluctance, reluctor, magnetic sensor, hall effect, hall sensor, optical]
+    kind: component
+    layer: L1
+    def: VR sensors generate an AC voltage that grows with speed; Hall sensors switch a powered digital signal.
+  - id: sync
+    term: Engine sync
+    also: [sync, synchronisation, synchronization, cam sync, trigger sync, home signal, sync tooth]
+    kind: concept
+    layer: L1
+    def: Determining the engine cycle position (which stroke) from the cam signal, needed for sequential fuel and coil-on-plug.
+
+  # ---- L1 air, boost, idle, limits ----
+  - id: variable_cam_control
+    term: Variable cam timing
+    abbr: [VVT, VVTi, VANOS, AVCS, VTC]
+    also: [variable cam timing, variable valve timing, cam control, VVT, VVTi, VANOS, AVCS, VTC, cam target, cam angle]
+    kind: strategy
+    layer: L1
+    def: Closed-loop control of camshaft phase relative to the crank by an oil-pressure actuator, to a target table.
+  - id: variable_cam_lift
+    term: Cam lift switching
+    abbr: [VTEC, MIVEC]
+    also: [VTEC, MIVEC, cam switching, lift changeover, cam changeover]
+    kind: strategy
+    layer: L1
+    def: Switching between low- and high-lift cam profiles at a speed or load point.
+  - id: boost_control
+    term: Boost control
+    also: [boost control, boost controller, boost target, boost duty, closed loop boost, open loop boost, wastegate duty, boost table, EBC]
+    kind: strategy
+    layer: L1
+    def: Setting turbo boost by modulating wastegate actuator pressure with a PWM solenoid, open loop (duty table) or closed loop to a target.
+  - id: wastegate
+    term: Wastegate
+    abbr: [WG]
+    also: [wastegate, waste gate, external wastegate, internal wastegate, wastegate actuator, wastegate spring]
+    kind: component
+    layer: L1
+    def: Valve that bypasses exhaust around the turbine to limit boost; the spring sets the minimum boost.
+  - id: idle_control
+    term: Idle speed control
+    abbr: [ISC, IAC]
+    also: [idle control, idle speed control, ISC, IAC, idle air control, idle valve, idle target, idle ignition control]
+    kind: strategy
+    layer: L1
+    def: Holding idle speed to a target with an air valve or throttle opening plus ignition-timing correction.
+  - id: drive_by_wire
+    term: Electronic throttle
+    abbr: [DBW, ETC]
+    also: [drive by wire, drive-by-wire, DBW, electronic throttle, electronic throttle control, ETC, E-throttle, throttle body motor]
+    kind: component
+    layer: L1
+    def: Motorised throttle body driven by the ECU from pedal demand, with redundant position sensors and safety checks.
+  - id: rev_limiter
+    term: Rev limiter
+    also: [rev limiter, rev limit, RPM limit, RPM limiter, hard cut, soft cut, fuel cut limiter, spark cut, ignition cut, limiter]
+    kind: strategy
+    layer: L1
+    def: Limiting engine speed by cutting fuel, spark or both, with hard and soft stages.
+  - id: launch_control
+    term: Launch control
+    also: [launch control, launch, two step, two-step, launch limiter]
+    kind: strategy
+    layer: L1
+    def: Holding a set engine speed (often with retard and cut to build boost) while stationary before a launch.
+  - id: antilag
+    term: Anti-lag
+    abbr: [ALS]
+    also: [antilag, anti-lag, anti lag, ALS]
+    kind: strategy
+    layer: L1
+    def: Keeping the turbo spooled off throttle with retarded timing, extra air and cut; very hard on the turbo and exhaust.
+  - id: flat_shift
+    term: Flat shift
+    also: [flat shift, flat-foot shift, no-lift shift, gear cut]
+    kind: strategy
+    layer: L1
+    def: A brief cut during a gearshift with the throttle held open.
+  - id: traction_control
+    term: Traction control
+    abbr: [TC]
+    also: [traction control, slip control, TC, wheel slip]
+    kind: strategy
+    layer: L1
+    def: Reducing torque (retard, cut, boost reduction) when driven-wheel speed exceeds a slip target.
+  - id: flex_fuel
+    term: Flex fuel
+    also: [flex fuel, flexfuel, flex-fuel, multi fuel, ethanol blend, flex sensor, ethanol sensor, fuel composition sensor]
+    kind: strategy
+    layer: L4
+    def: Blending fuel, spark and boost calibrations by measured ethanol content.
+  - id: water_methanol_injection
+    term: Water-methanol injection
+    abbr: [WMI]
+    also: [water methanol injection, water/methanol injection, water meth, meth injection, WMI, water injection]
+    kind: strategy
+    layer: L4
+    def: Spraying a water-methanol mix into the intake for charge cooling and knock margin; needs a failsafe if flow stops.
+  - id: nitrous
+    term: Nitrous oxide injection
+    abbr: [N2O, NOS]
+    also: [nitrous, nitrous oxide, N2O, NOS, nitrous control, wet nitrous, dry nitrous]
+    kind: strategy
+    layer: L4
+    def: Adding oxygen by injecting nitrous oxide; needs matched extra fuel and timing retard by stage.
+  - id: engine_protection
+    term: Engine protection
+    also: [engine protection, fail safe, failsafe, fail-safe, limp mode, limp home, protection, safety limits]
+    kind: strategy
+    layer: L1
+    def: Rules that reduce power or shut down when a limit or sensor fault is hit (oil pressure, lambda, knock, coolant, fuel pressure).
+
+  # ---- L1 sensors and I/O (generic) ----
+  - id: wideband_sensor
+    term: Wideband lambda sensor
+    abbr: [UEGO, LSU]
+    also: [wideband, wide band, wideband O2, UEGO, LSU 4.9, LSU 4.2, LSU ADV, wideband controller, lambda sensor, lambda probe]
+    kind: component
+    layer: L1
+    def: Pumped-cell oxygen sensor that measures lambda over a wide range; needs heater control and warm-up before readings are valid.
+  - id: narrowband_sensor
+    term: Narrowband oxygen sensor
+    abbr: [HEGO, NB]
+    also: [narrowband, narrow band, narrowband O2, O2 sensor, oxygen sensor, HEGO, switching sensor]
+    kind: component
+    layer: L1
+    def: Switching oxygen sensor that only says rich or lean of stoichiometric; useless for tuning lambda away from 1.
+  - id: analog_input
+    term: Analog input
+    abbr: [AI]
+    also: [analog input, analogue input, analog voltage input, AVI, An Volt, AN, voltage input]
+    kind: component
+    layer: L3
+    def: ECU input that reads a 0-5 V sensor signal and scales it through a calibration.
+  - id: temperature_input
+    term: Temperature input
+    also: [temperature input, An Temp, thermistor input, NTC input]
+    kind: component
+    layer: L3
+    def: ECU input with a pull-up resistor for reading NTC thermistor sensors (coolant, air, oil).
+  - id: digital_input
+    term: Digital input
+    abbr: [DI, DPI, SPI]
+    also: [digital input, DI, DPI, SPI, switch input, frequency input, speed input, digital pulsed input]
+    kind: component
+    layer: L3
+    def: ECU input reading on/off switches or frequency signals (wheel speed, flex sensor).
+  - id: output_channel
+    term: Auxiliary output
+    abbr: [PWM]
+    also: [auxiliary output, aux output, Aux, DPO, digital pulsed output, GP output, general purpose output, PWM output, low side output, half bridge, ignition output, injector output]
+    kind: component
+    layer: L3
+    def: ECU output driving a solenoid, relay or motor, switched on/off or pulse-width modulated.
+  - id: can_bus
+    term: CAN bus
+    abbr: [CAN]
+    also: [CAN, CAN bus, CANbus, CAN stream, CAN keypad, CAN lambda, dash stream, OBD-II]
+    kind: component
+    layer: L3
+    def: Two-wire vehicle network ECUs use to send and receive data with dashes, keypads, wideband controllers and OEM modules.
+  - id: calibration_table
+    term: Calibration table
+    abbr: [cal]
+    also: [calibration, sensor calibration, cal table, calibration table, sensor cal]
+    kind: table
+    layer: L3
+    def: Voltage-to-value mapping for a sensor input.
+  - id: base_map
+    term: Base map
+    also: [base map, base tune, base file, base calibration, startup map, start file]
+    kind: concept
+    layer: L3
+    def: A starting calibration for an engine type, enough to start and idle before tuning begins.
+  - id: datalog
+    term: Datalog
+    also: [datalog, data log, data logging, logging, log file, internal log, PC log]
+    kind: procedure
+    layer: L5
+    def: A time series of ECU channels recorded on the ECU or the laptop for analysis.
+
+  # ---- L5 procedures and states ----
+  - id: koeo
+    term: Key on, engine off
+    abbr: [KOEO]
+    also: [KOEO, key on engine off, ignition on engine off]
+    kind: procedure
+    layer: L5
+    def: Ignition on and engine stopped; used to check MAP against baro, sensor plausibility and actuator tests.
+  - id: wot
+    term: Wide-open throttle
+    abbr: [WOT]
+    also: [WOT, wide open throttle, full throttle, full load]
+    kind: procedure
+    layer: L5
+    def: Throttle fully open; the full-load region of the tables.
+  - id: steady_state
+    term: Steady-state tuning
+    also: [steady state, steady-state, load point, cell by cell, held load]
+    kind: procedure
+    layer: L5
+    def: Holding the engine at fixed speed and load (usually on a load-bearing dyno) to tune one table region at a time.
+  - id: ramp_run
+    term: Ramp run
+    also: [ramp run, sweep, power run, pull, dyno run, acceleration run]
+    kind: procedure
+    layer: L5
+    def: Accelerating through the speed range at a controlled rate under full or fixed load, measuring torque and lambda.
+  - id: dyno
+    term: Dynamometer
+    also: [dyno, dynamometer, chassis dyno, engine dyno, hub dyno, load bearing dyno, inertia dyno, eddy current]
+    kind: component
+    layer: L5
+    def: Machine that measures torque; load-bearing types can hold steady speed for steady-state tuning, inertia types only sweep.
+  - id: injector_characterisation
+    term: Injector characterisation data
+    also: [injector data, injector characterisation, injector characterization, injector characterization data, injector deadtimes, flow data]
+    kind: concept
+    layer: L1
+    def: Measured dead time against voltage and pressure, plus short-pulse correction and flow slope, supplied by the injector maker.

@@ -1,0 +1,55 @@
+# Abort rules applied to every run. docs/SAFETY.md rule 6. `limit` names an entry in limits.yaml when the trigger has a number.
+version: 1
+status: draft
+verified: 2026-11-10
+aborts:
+  - id: knock_event
+    trigger: knock detected, audible or above threshold
+    action: abort the run, remove timing in the affected region before retrying
+    limit: timing_retard_on_knock_deg
+    source: practice
+    locator: Practical Standalone Tuning 03-36
+  - id: pre_ignition_suspected
+    trigger: sudden power loss or knock pattern unrelated to timing changes, or a rapid temperature rise
+    action: stop immediately and inspect the engine
+    source: engineering-texts
+    locator: p.450-458
+  - id: lean_beyond_limit
+    trigger: lambda leaner than target by more than the margin
+    action: abort, add fuel before retrying
+    limit: lean_abort_lambda_margin
+    source: docs/SAFETY.md
+    locator: rule 6
+  - id: boost_overshoot
+    trigger: boost above target by more than the margin
+    action: abort, investigate boost control before raising anything
+    limit: boost_overshoot_abort_kpa
+    source: docs/SAFETY.md
+    locator: rule 6
+  - id: ecu_protection_active
+    trigger: an ECU protection or limiter activates unexpectedly
+    action: stop and find out why; never disable the protection to continue
+    source: docs/SAFETY.md
+    locator: rule 7
+  - id: oil_pressure_low
+    trigger: oil pressure below engine minimum, or absent
+    action: stop the engine at once
+    limit: oil_pressure_min_kpa
+    source: practice
+    locator: Practical Standalone Tuning 03-22
+  - id: coolant_overheat
+    trigger: coolant above warning level
+    action: pause tuning and cool down
+    limit: coolant_warning_c
+    source: practice
+    locator: Practical Standalone Tuning 05-02
+  - id: wideband_invalid
+    trigger: wideband not ready, in fault or disagreeing with other evidence
+    action: stop using lambda as evidence; no fuel changes until fixed
+    source: docs/SAFETY.md
+    locator: rule 1
+  - id: unsafe_road
+    trigger: traffic, unsuitable road or conditions, or driver distraction
+    action: end the run; driving safety outranks data
+    source: docs/SAFETY.md
+    locator: rule 9

@@ -1,0 +1,175 @@
+# pattern: Python regex, matched case-insensitively on word boundaries you write yourself (\b).
+# term: canonical id in principles/glossary/terms.yaml (or a platform/product name).
+# scope: any | link (only applied to transcripts about that platform: playlist/title mentions it).
+# seen: evidence from the sampled practitioner training youtube-auto captions, 2026-11-08 (hits / files). Add a rule only after
+# checking the hits in context (mine_terms.py kwic); a rule that could hit normal English needs a narrow pattern.
+version: 1
+rules:
+  - id: g4x-forex
+    pattern: '\bG ?Forex\b'
+    replace: G4X
+    term: link-g4x
+    scope: link
+    seen: 11/11
+  - id: g4x-xbox
+    pattern: '\bG ?(?:4|for|four) ?X ?box(es)?\b'
+    replace: 'G4X box\1'
+    term: link-g4x
+    scope: link
+    seen: 9/7
+  - id: volumetric
+    pattern: '\b(?:volutric|voluometric|volumetrick)\b'
+    replace: volumetric
+    term: volumetric_efficiency
+    scope: any
+    seen: 7/5
+  - id: modelled-mode
+    pattern: '\bmodel mode\b'
+    replace: modelled mode
+    term: fuel_model
+    scope: any
+    seen: 6/4
+  - id: modelled-multi-fuel
+    pattern: '\b(?:model|modeled) (?:model )?multi[- ]?fuel\b|\bmultiffuel\b'
+    replace: modelled multi fuel
+    term: fuel_model
+    scope: any
+    seen: 4/3
+  - id: koeo
+    pattern: '\b(?:keon|kion|keyon)\b'
+    replace: KOEO
+    term: koeo
+    scope: any
+    seen: 5/4
+  - id: baro
+    pattern: '\bbarrow\b|\bbarrel(?= pressure)'
+    replace: baro
+    term: baro
+    scope: any
+    seen: 6/4
+  - id: iat
+    pattern: '\bIET\b'
+    replace: IAT
+    term: iat
+    scope: any
+    seen: 7/4
+  - id: dyno
+    pattern: '\b(?:dyo|dyna|dino)\b'
+    replace: dyno
+    term: dyno
+    scope: any
+    seen: 14/7
+  - id: knock
+    pattern: '\bnock\b|\bnok(?= control| target| sensor)'
+    replace: knock
+    term: knock_control
+    scope: any
+    seen: 4/3
+  - id: lambda
+    pattern: '\blamda\b|\blamb da\b|\blam da\b'
+    replace: lambda
+    term: lambda
+    scope: any
+    seen: 11/3
+  - id: stoich
+    pattern: '\bstoichi\b'
+    replace: stoich
+    term: stoich_afr
+    scope: any
+    seen: 1/1
+  - id: wastegate
+    pattern: '\bwaist ?gate\b'
+    replace: wastegate
+    term: wastegate
+    scope: any
+    seen: 2/2
+  - id: post-start
+    pattern: '\bpost ?d?art\b'
+    replace: post start
+    term: post_start_enrichment
+    scope: any
+    seen: 6/4
+  - id: flex-fuel
+    pattern: '\bflexfield\b|\bflexx\b'
+    replace: flex fuel
+    term: flex_fuel
+    scope: any
+    seen: 3/3
+  - id: water-meth
+    pattern: '\bwatermeth\b'
+    replace: water meth
+    term: water_methanol_injection
+    scope: any
+    seen: 12/2
+  - id: aquamist
+    pattern: '\baqua ?(?:mus|miss|mass|green)\b'
+    replace: Aquamist
+    term: water_methanol_injection
+    scope: any
+    seen: 5/3
+  - id: injector
+    pattern: '\bejector\b'
+    replace: injector
+    term: injector_pulse_width
+    scope: any
+    seen: 3/3
+  - id: motec
+    pattern: '\bmo ?tech\b'
+    replace: MoTeC
+    term: platform-name
+    scope: any
+    seen: 3/3
+  - id: vtec
+    pattern: '\bv ?tech\b'
+    replace: VTEC
+    term: variable_cam_lift
+    scope: any
+    seen: 3/3
+  - id: non-vtec
+    pattern: '\bnon ?v ?t?tech\b|\bnonvtec\b'
+    replace: non-VTEC
+    term: variable_cam_lift
+    scope: any
+    seen: 3/3
+  - id: megalogviewer
+    pattern: '\bmega ?log ?viewer ?hd\b|\bmegaloghd\b'
+    replace: MegaLogViewer HD
+    term: datalog
+    scope: any
+    seen: 3/3
+  - id: hysteresis
+    pattern: '\bhysteresus\b'
+    replace: hysteresis
+    term: general
+    scope: any
+    seen: 1/1
+  - id: fuel-table
+    pattern: '\bfueld(?= table)'
+    replace: fuel
+    term: fuel_table
+    scope: any
+    seen: 2/2
+  - id: base-map
+    pattern: '\bbasem(?= map)'
+    replace: base
+    term: base_map
+    scope: any
+    seen: 2/2
+  - id: wide-open
+    pattern: '\bwide openen\b'
+    replace: wide open
+    term: wot
+    scope: any
+    seen: 3/2
+  - id: and-play
+    pattern: '\bandplay\b'
+    replace: and play
+    term: general
+    scope: any
+    seen: 7/5
+  - id: with-the
+    pattern: '\bwithth\b'
+    replace: with the
+    term: general
+    scope: any
+    seen: 2/2

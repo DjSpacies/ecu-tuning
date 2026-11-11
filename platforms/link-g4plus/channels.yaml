@@ -1,0 +1,96 @@
+# Native log channel -> canonical channel. match is a case-insensitive regular expression on the channel name.
+# convert: none | afr_to_lambda (divide by unit scale; flagged) | psi_to_kpa
+# Observed in two vendor sample logs (firmware 4.4); the user's own logs may have other names or units.
+version: 1
+channels:
+  - match: '^Engine Speed$'
+    canonical: rpm
+    convert: none
+  - match: '^MAP$|^Manifold Absolute Pressure$'
+    canonical: map_kpa
+    convert: none
+  - match: '^MGP$|^Manifold Gauge Pressure$'
+    canonical: mgp_kpa
+    convert: none
+  - match: '^BAP$|^Barometric Absolute Pressure$'
+    canonical: baro_kpa
+    convert: none
+  - match: '^TP \(Main\)$|^Throttle Position \(Main\)$'
+    canonical: tps
+    convert: none
+  - match: '^ECT$|^Engine Coolant Temperature$'
+    canonical: ect
+    convert: none
+  - match: '^IAT$|^Inlet Air Temperature$'
+    canonical: iat
+    convert: none
+  - match: '^Ign Angle$|^Ignition Angle$'
+    canonical: ign_adv
+    convert: none
+  - match: '^Injector PW$|^Injection Actual Pulse Width$|^Inj Actual PW$'
+    canonical: inj_pw
+    convert: none
+  - match: '^Inj Duty Cycle$|^Injector Duty Cycle$'
+    canonical: inj_duty
+    convert: none
+  - match: '^Batt Voltage$'
+    canonical: battery_v
+    convert: none
+  - match: '^Gear$'
+    canonical: gear
+    convert: none
+  - match: '^Speed \(DI1\)$|^Driven Wheel Speed$'
+    canonical: vehicle_speed
+    convert: none
+  - match: '^Knock Level +Global$'
+    canonical: knock_level
+    convert: none
+  - match: '^Knock Count Global$'
+    canonical: knock_count
+    convert: none
+  - match: 'Oil Pressure$'
+    canonical: oil_pressure_kpa
+    convert: by_unit_pressure
+  - match: 'Fuel Pressure$'
+    canonical: fuel_pressure_kpa
+    convert: by_unit_pressure
+  - match: 'WideBand$|^Lambda ?1?$'
+    canonical: lambda
+    convert: by_unit_lambda
+  - match: '^Overrun Fuel Cut( Status)?$|^Percentage FCut$'
+    canonical: fuel_cut
+    convert: none
+  - match: '^Boost Target$'
+    canonical: boost_target_kpa
+    convert: none
+  - match: '^Wastegate Duty Cycle$|^Wgate Duty Cycle$|^WGate DC$'
+    canonical: wastegate_duty
+    convert: none
+  - match: '^CL Lambda +Fuel +Corr(ection|\.)$'
+    canonical: fuel_trim
+    convert: none
+  - match: '^Accel Fuel$'
+    canonical: accel_enrich
+    convert: none
+  - match: '^Thermocouple 1$|^EGT ?1?$'
+    canonical: egt
+    convert: none
+  - match: '^Fuel Table 1$'
+    canonical: ve_out
+    convert: none
+  - match: '^Fuel Table 2$'
+    canonical: ve_2_out
+    convert: none
+  - match: '^Ign Table ?1$'
+    canonical: ign_out
+    convert: none
+  - match: '^Ign Table ?2$'
+    canonical: ign_2_out
+    convert: none
+  - match: '^% Ethanol$'
+    canonical: ethanol_pct
+    convert: none
+  - match: '^Lambda Target$|^AFR/Lambda Target$'
+    canonical: lambda_target
+    convert: by_unit_lambda
+limiters: [RPM Limit Status, MAP Limit Status, Speed Limit Status, Max Ignition Status, Voltage Limit Status, Under Voltage Status, Launch Limit Status, GP RPM Limit 1 Status, GP RPM Limit 2 Status, E-Throttle Limit Status, Closed Loop Stepper Limit Status, RPM Limit, MAP Limit, Speed Limit, Max Ignition, Voltage Limit, Under Voltage, Launch Limit, GP RPM Limit1, GP RPM Limit2, E-Throttle Limit, CL Stepper Limit]

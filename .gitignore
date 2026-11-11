@@ -1,0 +1,20 @@
+# Private training material (licensed, never distributed)
+collateral/*
+!collateral/README.md
+# User's own tunes/logs/setup profiles
+inbox/*
+!inbox/README.md
+*.profile.yaml
+__pycache__/
+.venv/
+.venv/
+vendor/
+bin/
+# Collateral acquisition for paid courses: content IDs and binaries stay local
+# Distillation intermediates and derived corpus indexes live under collateral/ (already ignored)
+*.pclr
+*.llg
+*.msq
+*.hal
+*.mlg
+# Run artefacts of the fetch tools

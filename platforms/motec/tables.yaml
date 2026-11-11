@@ -1,0 +1,12 @@
+# Native table -> role, from the vendor documents. No parser yet.
+version: 1
+tables:
+  - native: Engine Efficiency
+    role: ve
+    evidence: vendor-doc
+  - native: Fuel Mixture Aim
+    role: lambda_target
+    evidence: vendor-doc
+  - native: Ignition Timing Main
+    role: ign_base
+    evidence: vendor-doc

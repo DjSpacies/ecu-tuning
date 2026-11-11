@@ -1,0 +1,171 @@
+# Default safety envelope. docs/SAFETY.md. A user may make any value MORE conservative, never less.
+# Every value cites a source. `value: unknown` means no source supports a number: workflows refuse to proceed on it
+# unless the user declares a limit (in the setup profile), and then only in the conservative direction.
+version: 1
+status: draft
+verified: 2026-11-10
+limits:
+  - id: lambda_na_full_load_min
+    value: 0.85
+    unit: lambda
+    applies: naturally aspirated, full load
+    bound: min
+    source: practice
+    locator: EFI Tuning Fundamentals 02-11 (best power band 0.85 to 0.92)
+  - id: lambda_na_full_load_max
+    value: 0.92
+    unit: lambda
+    applies: naturally aspirated, full load
+    bound: max
+    source: practice
+    locator: EFI Tuning Fundamentals 02-11
+  - id: lambda_boost_power_max
+    value: 0.85
+    unit: lambda
+    applies: forced induction, boost, best-power band 0.82 to 0.85; may need richer for safety
+    bound: max
+    source: practice
+    locator: EFI Tuning Fundamentals 02-11
+  - id: lambda_high_boost_target_max
+    value: 0.80
+    unit: lambda
+    applies: forced induction at high boost; practitioner gives 0.78 to 0.80 for engine safety
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 03-29
+  - id: lambda_idle_min
+    value: 0.90
+    unit: lambda
+    applies: idle, do not tune richer
+    bound: min
+    source: practice
+    locator: EFI Tuning Fundamentals 02-11
+  - id: timing_step_advance_deg
+    value: 2
+    unit: degrees
+    applies: maximum single advance step, reduced to timing_step_advance_fine_deg near the optimum
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 03-33, 03-36
+  - id: timing_step_advance_fine_deg
+    value: 1
+    unit: degrees
+    applies: advance step when close to optimum
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 03-36
+  - id: timing_retard_on_knock_deg
+    value: 2
+    unit: degrees
+    applies: minimum timing removed in the affected region after a knock event (practitioner gives 2 to 3)
+    bound: min
+    source: practice
+    locator: Practical Standalone Tuning 03-36
+  - id: timing_adjacent_cell_review_deg
+    value: 6
+    unit: degrees
+    applies: difference between neighbouring cells above which the map is flagged for review
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 03-36
+  - id: boost_step_kpa
+    value: 20
+    unit: kPa
+    applies: maximum boost target increase per step
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 05-05
+  - id: injector_duty_max_pct
+    value: 85
+    unit: percent
+    applies: duty ceiling for sizing and operation (practitioner gives 85 to 90)
+    bound: max
+    source: practice
+    locator: EFI Tuning Fundamentals 06-04
+  - id: battery_running_min_v
+    value: 13.8
+    unit: volts
+    applies: charging system check while running (practitioner gives 13.8 to 14.2)
+    bound: min
+    source: practice
+    locator: Practical Standalone Tuning 03-22
+  - id: coolant_warning_c
+    value: 100
+    unit: C
+    applies: pause tuning and cool down; one practitioner's dyno warning setting
+    bound: max
+    source: practice
+    locator: Practical Standalone Tuning 05-02
+  - id: oil_pressure_guide_kpa_per_1000rpm
+    value: 69
+    unit: kPa per 1000 rpm
+    applies: rule of thumb (10 psi per 1000 rpm) when no engine data exists; a guide for review, not an engine minimum
+    bound: min
+    source: practice
+    locator: training sessions 171, 264, 350, 372
+  - id: egt_turbine_sustained_guide_c
+    value: 1000
+    unit: C
+    applies: sustained exhaust temperature above which turbine components are at risk (practitioner gives 1000 to 1050)
+    bound: max
+    source: practice
+    locator: training session 350
+  - id: fuel_pump_flow_margin_pct
+    value: 25
+    unit: percent
+    applies: pump flow over injector demand, one practitioner's sizing guide
+    bound: min
+    source: practice
+    locator: training session 142
+  - id: knock_margin_buffer_deg
+    value: 2
+    unit: degrees
+    applies: buffer below the knock point (practitioner gives 2 to 3)
+    bound: min
+    source: practice
+    locator: Practical Standalone Tuning 08-175
+  - id: fuel_change_lean_max_pct
+    value: unknown
+    unit: percent
+    applies: maximum fuel removal per iteration
+    reason: Sources give the correction method but no cap on a single step.
+  - id: fuel_change_rich_max_pct
+    value: unknown
+    unit: percent
+    applies: maximum fuel addition per iteration
+    reason: Sources give the correction method but no cap on a single step.
+  - id: lean_abort_lambda_margin
+    value: unknown
+    unit: lambda
+    applies: how far leaner than target triggers an abort
+    reason: No source gives a general number; it depends on engine, fuel and load.
+  - id: boost_overshoot_abort_kpa
+    value: unknown
+    unit: kPa
+    applies: boost above target that triggers an abort
+    reason: Depends on the engine and its protection setup; no general figure found.
+  - id: egt_max_c
+    value: unknown
+    unit: C
+    applies: exhaust gas temperature abort
+    reason: Engine and sensor-position specific; no general figure found.
+  - id: oil_pressure_min_kpa
+    value: unknown
+    unit: kPa
+    applies: minimum oil pressure against rpm
+    reason: Engine specific; must come from the engine builder or manufacturer.
+  - id: fuel_pressure_min_margin_kpa
+    value: unknown
+    unit: kPa
+    applies: allowed fall in differential fuel pressure
+    reason: No general figure found.
+  - id: max_rpm
+    value: unknown
+    unit: rpm
+    applies: engine speed limit
+    reason: Engine specific; user must state it.
+  - id: max_boost_kpa
+    value: unknown
+    unit: kPa
+    applies: boost ceiling
+    reason: Engine and fuel specific; user must state it.

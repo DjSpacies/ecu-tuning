@@ -1,0 +1,26 @@
+# Evidence tiers. Each knowledge entry names the kind of evidence it rests on; published standards are cited directly.
+sources:
+  - id: practice
+    title: Practitioner training and tuning practice, distilled and cross-checked.
+    tier: public
+  - id: engineering-texts
+    title: Engine, combustion, charging and control engineering texts.
+    tier: public
+  - id: reference-data
+    title: Published reference data: thermophysical properties, fuel data, sensor and injector data sheets, statistics.
+    tier: public
+  - id: vendor-documentation
+    title: ECU and tuning-tool vendor documentation.
+    tier: public
+  - id: file-format-analysis
+    title: Analysis of file formats from files the user owns, for interoperability.
+    tier: public
+  - id: public-tune-corpus
+    title: Publicly shared base tunes, used only as aggregate plausibility checks.
+    tier: public
+  - id: sae-j1349
+    title: SAE J1349, engine power test code (correction to standard conditions)
+    tier: standard
+  - id: astm-fuel-standards
+    title: ASTM D2699 and D2700, research and motor octane test methods
+    tier: standard
