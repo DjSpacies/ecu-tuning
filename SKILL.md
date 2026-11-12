@@ -5,8 +5,6 @@ description: Tune gasoline/ethanol/methanol performance engines via ECU tune fil
 
 # ECU tuning
 
-Status: draft. Nothing here has been verified on a real engine by this skill. See docs/VALIDATION.md.
-
 ## Router
 Paths below are relative to this skill's directory. Work for one vehicle lives in a project folder outside it
 (`tools/project/new_project.py`, docs/SETUP.md); read that project's profile.json and history.md first.
