@@ -5,12 +5,8 @@ methanol engines** (performance-oriented). Diesel is out of scope.
 
 It lets an agent (any capable model/harness) go from a tune file + log file, to
 guided road/dyno sessions, to live tuning through an ECU interface (MCP) once such
-tooling exists. Design is top-down, in the style of the Reverse Engineer Anything
-skill: a strong first-principles foundation, then methodology, then platform and
+tooling exists. Design is top-down: a strong first-principles foundation, then methodology, then platform and
 application specifics.
-
-Status: **working proof of concept (draft).** Offline analysis of logs and tunes works for Link G4+, with partial
-support for Haltech and TunerStudio-based ECUs. Nothing has been verified on a real engine by this skill.
 
 **Quickstart: docs/SETUP.md.** Contributing: CONTRIBUTING.md.
 
