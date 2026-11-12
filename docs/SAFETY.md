@@ -16,8 +16,7 @@ every workflow's definition.
    oil pressure/fuel pressure if logged, ECU protection triggers.
 7. Respect ECU-level protections; never advise disabling them to "get the tune to work".
 8. No live writes while the vehicle is moving unless explicitly enabled and bounded (default off).
-9. Road: legality and public safety outrank data; recommend dyno where risk is high.
-10. State uncertainty; "not enough data to change this safely" is a valid, preferred output.
+9. State uncertainty; "not enough data to change this safely" is a valid, preferred output.
 
 ## Limits files (machine-readable, to be authored)
 safety/limits.yaml: default envelopes by fuel/aspiration (lambda floors under load, timing change
