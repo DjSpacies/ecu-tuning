@@ -5,7 +5,7 @@
 L0 First principles   physics, thermo, combustion, fluids, control theory, statistics
 L1 Engine systems     airflow/VE, fueling, ignition/knock, boost, thermal, torque model, idle, transients
 L2 Methodology        brand-neutral tuning procedures, validation, data-quality gates
-L3 Platform adapters  per-ECU: file formats, tables, units, quirks (Link G4+ first)
+L3 Platform adapters  per-ECU: file formats, tables, units, quirks
 L4 Applications       engine/fuel profiles: NA, turbo, SC, ITB, E85, methanol, DI, etc.
 L5 Execution modes    offline | road (solo/two-person, voice) | dyno | live (MCP)
 ```
@@ -25,8 +25,6 @@ tools/                log-schema/ (normalised models), analysis/ (brand-neutral 
 safety/               machine-readable limits, step caps, abort rules
 sources/              registry.yaml: every source, tier, status
 evals/                cases with known-good answers; scoring
-collateral/           PRIVATE licensed training input (gitignored)
-inbox/                PRIVATE real tunes/logs (gitignored)
 ```
 
 ## Data flow
