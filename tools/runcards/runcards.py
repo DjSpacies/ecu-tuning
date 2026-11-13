@@ -9,7 +9,7 @@ from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools" / "glossary"))
+sys.path.insert(0, str(ROOT / "tools" / "common"))
 import miniyaml  # noqa: E402
 
 BASE_ABORTS = [a["id"] for a in miniyaml.load((ROOT / "safety" / "aborts.yaml").read_text(encoding="utf8"))["aborts"]]

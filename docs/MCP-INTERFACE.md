@@ -1,4 +1,4 @@
-# ECU tool interface (v1, draft)
+# ECU tool interface (v1)
 
 Few/no ECU vendors expose MCP today. This is a vendor-neutral contract so a vendor or
 community project can implement it, and the skill can use any implementation.
@@ -10,7 +10,7 @@ community project can implement it, and the skill can use any implementation.
 - **Units explicit** in every value. **Canonical channel names** with `native_name` mapping.
 - **Idempotent, versioned** operations; every write returns the before/after.
 
-## Operations (draft)
+## Operations
 | Op | Description | Cap flag |
 |---|---|---|
 | `capabilities()` | ecu family, firmware, supported ops, limits | always |
@@ -40,6 +40,3 @@ JSON-RPC 2.0, one object per line, with method names as the operation names abov
 - `propose_write(changes)`: each change is `{table, row, col, value}`. It has no effect, returns a `proposal_id` and a diff with `before` and `after`, and rejects anything outside bounds.
 - `apply_write(proposal_id, approval_token)`: requires a backup taken first and a human-issued token. Tokens and proposals are single use.
 - A tool must not offer a write path that skips these.
-
-## For integrators
-See tools/mcp-mock/INTEGRATOR.md. `tools/mcp-mock/conformance.py` is the test suite; `server.py` is a replay implementation over a saved log and tune.

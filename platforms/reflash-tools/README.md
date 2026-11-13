@@ -1,3 +1,4 @@
-# Reflash tools (documentation level)
+# Reflash tools
 
-Notes from vendor manuals for factory-ECU tools. No parser exists. See `semantics.md`.
+Coverage: documentation. `semantics.md` describes how factory-ECU tuning tools expose and apply calibrations. The skill
+does not read their files; see methodology/reflash-tuning for the procedure.

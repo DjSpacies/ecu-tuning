@@ -1,4 +1,4 @@
-"""Read-only parser for PCLink ECU-log files (.llg). Layout is sample-observed from two vendor sample logs; see ../formats.md.
+"""Read-only parser for PCLink ECU-log files (.llg). Layout is sample-observed; see ../formats.md.
 
 The file holds one record per channel: a 32-bit id, a UTF-16 name, a UTF-16 unit, a 64-bit logging interval in seconds,
 then (float32 value, float32 time) pairs. Field offsets differ between the two files seen, so the parser finds each

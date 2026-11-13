@@ -15,16 +15,15 @@ L5 Execution modes    offline | road (solo/two-person, voice) | dyno | live (MCP
 SKILL.md              router (entry point for any agent)
 AGENTS.md             contributor/agent rules
 docs/                 design documents (this folder)
-principles/           L0/L1 knowledge; calculators/ = tested Python; glossary/ = canonical terms
+principles/           L0/L1 knowledge; calculators/ = Python calculators; glossary/ = canonical terms
 methodology/          L2 procedures
-platforms/<ecu>/      L3 adapters (link-g4plus first); terms.yaml = platform vocabulary
+platforms/<ecu>/      L3 adapters; terms.yaml = platform vocabulary
 applications/         L4 profiles
 workflows/            task recipes with declared required inputs
-tools/                log-schema/ (normalised models), analysis/ (brand-neutral analyses, run.py), sim/ (D2 engine),
-                      runcards/, mcp-mock/ (replay server, conformance), kb-lint/, verbatim-check/, test_all.sh
+tools/                log-schema/ (normalised models), analysis/ (brand-neutral analyses, run.py), runcards/,
+                      tune-diff/, project/ (new tuning project folder), common/ (shared helpers)
 safety/               machine-readable limits, step caps, abort rules
 sources/              registry.yaml: every source, tier, status
-evals/                cases with known-good answers; scoring
 ```
 
 ## Data flow
@@ -51,6 +50,6 @@ SKILL.md stays small. Workflows list exactly which principle/methodology/platfor
 to load, so small-context models are not flooded.
 
 ## Calculators
-principles/calculators/ holds small tested Python (CLI-callable) for conversions,
+principles/calculators/ holds small Python (CLI-callable) for conversions,
 stoichiometry, injector scaling, VE/airflow, boost/pressure ratio, etc. The KB also gives
 formulas and worked examples so agents without code execution can still follow them.

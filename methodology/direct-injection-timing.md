@@ -89,7 +89,7 @@ In one demonstration on a 2.0 L DI engine (DI only, port disabled), at 3000 rpm 
 - **Reference choice**: one demonstration swept DI using an end-of-injection reference successfully, while another lesson warns that end referencing on DI pushed injection into the exhaust stroke unnoticed, and recommends start-of-injection. A further source states start referencing is the norm for DI and end for port. Resolution in this entry: either reference works only if the other end is calculated and checked.
 - **Lambda as a guide**: one demonstration found DI angle changed torque with no lambda change, so torque was the only feedback. Another found closed-loop trim moved by about 2 % and tracked the torque optimum. Both may hold: trim shows burn-efficiency changes at lambda 1 that an open-loop wideband reading may not resolve. Test: sweep the same cell open and closed loop and compare.
 - **Injecting near TDC**: factory practice on at least one engine injects near intake TDC at high rpm with a gain (explained by latency and a piston bowl). Another warning says spraying at a piston near TDC can damage pistons on some DI engines. Do not generalise either.
-- **Thin coverage**: the instruction base is a handful of lessons largely on one engine family. Treat as draft.
+- **Thin coverage**: the instruction base is a handful of lessons largely on one engine family. Treat with caution.
 
 ## Citations
 - practice: Practitioner training and tuning practice, distilled and cross-checked.

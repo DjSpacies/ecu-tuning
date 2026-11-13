@@ -1,4 +1,4 @@
-# CSV column name -> canonical channel. Names are PLACEHOLDERS (evidence: assumed); confirm against a real export.
+# CSV column name -> canonical channel. Names are assumed; confirm them against your export.
 version: 1
 channels:
   - column: Engine Speed

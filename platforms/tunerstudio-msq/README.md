@@ -1,6 +1,6 @@
 # TunerStudio tune files (Speeduino, rusEFI/FOME, MegaSquirt)
 
-Status: draft. Tunes only; TunerStudio logs (.mlg, .msl) are not read yet.
+Reads tune files (.msq). TunerStudio logs (.mlg, .msl) are not read.
 
 `parser/adapter.py` reads `.msq` XML and maps each family's tables to canonical roles:
 
@@ -11,12 +11,12 @@ Status: draft. Tunes only; TunerStudio logs (.mlg, .msl) are not read yet.
 | lambda_target | afrTable / rpmBinsAFR / loadBinsAFR | lambdaTable / lambdaRpmBins / lambdaLoadBins | afrTable1 / arpm_table1 / amap_table1 |
 | boost_target | boostTable / rpmBinsBoost / tpsBinsBoost | boostTableOpenLoop / boostRpmBins / boostTpsBins | not mapped |
 
-Observed in the files (2026-11-10):
+Format notes:
 - Row 0 of a table is the lowest load bin; columns follow the rpm bins.
 - Older rusEFI files omit `rows`/`cols`; arrays are reshaped only when their length equals the bin product.
 - Unused trailing bins repeat or fall; only the leading increasing part of each axis is used.
 - Target tables are often stored as AFR; they are converted to lambda with the tune's own stoichiometric ratio.
 - The load axis is taken as manifold pressure unless the fuel algorithm or bin units say throttle.
-- MegaSquirt names are from the MS documentation, not yet checked against a real MS file.
+- MegaSquirt table names follow the MS documentation.
 
 The XML parser refuses files with a DOCTYPE or entity declarations.

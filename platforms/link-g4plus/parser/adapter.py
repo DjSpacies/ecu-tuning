@@ -4,7 +4,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
-sys.path[:0] = [str(HERE), str(ROOT / "tools" / "log-schema"), str(ROOT / "tools" / "glossary")]
+sys.path[:0] = [str(HERE), str(ROOT / "tools" / "log-schema"), str(ROOT / "tools" / "common")]
 import llg, pclr, miniyaml     # noqa: E402
 from schema import Log, Table  # noqa: E402
 

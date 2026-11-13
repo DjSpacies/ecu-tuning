@@ -68,7 +68,7 @@ Recording, in this order:
 5. Drive steadily: hold rpm and load at as many steady points as the road allows, with smooth throttle, using gear choice to set load and staying in one gear where possible. Repeat points rather than chase new ones. The sources gather at least 5 to 10 minutes of varied driving, and around 20 minutes once the engine runs well. On a dyno, hold each cell for a few seconds until it settles before moving on.
 6. If knock detection is to be checked, add part-throttle, low-load running up through the rpm range where knock is reported, so the noise floor at that rpm can be separated from load. A level that rises with rpm at low load is mechanical noise; one that appears only with load and advance may be knock. Confirm with audio either way. Without a knock channel, a log-marker button pressed when knock is heard marks the spot.
 7. If transient fuelling is to be reviewed, add separate, deliberate throttle tip-ins at different rates, kept apart from the steady driving.
-8. Only with the limits above declared, and on a dyno, track or closed road: full-throttle pulls in a gear that gives several seconds of acceleration (the project owner uses third gear from about 3000 rpm), ending below the declared rev limit. Let lambda settle at full throttle before the data of interest and finish the data before lifting. Do one pull, stop and review it before any more. Lift at once on any knock or abort condition. Let temperatures recover between pulls.
+8. Only with the limits above declared, and on a dyno, track or closed road: full-throttle pulls in a gear that gives several seconds of acceleration (for example third gear from about 3000 rpm), ending below the declared rev limit. Let lambda settle at full throttle before the data of interest and finish the data before lifting. Do one pull, stop and review it before any more. Lift at once on any knock or abort condition. Let temperatures recover between pulls.
 9. To check a closed-loop controller (boost, cam, idle), command a step in its target during the run and log target, measured value, output duty and the individual control terms where available; a plain ramp does not exercise the controller once it is on target.
 10. Stop logging, save the log with a name that identifies the test, and record anything that changed during it.
 
@@ -87,7 +87,6 @@ A 15-minute road log starts with the engine already warm, has closed loop on thr
 A second log has 40 diagnostic-port parameters and runs at about 3 samples per second. The review reports that lambda and load cannot be aligned at that rate and asks for a fuelling-only list of eight parameters.
 
 ## Disputed / conflicts
-- The recording order is the project owner's stated practice, assembled with the sourced rules in the entries this depends on.
 - **How many channels.** Several sources favour a minimal core set to avoid confusion and preserve rate; one notes that logging every channel on every run builds a valuable baseline. The two agree once the logger's rate is not affected by channel count: minimal lists where bandwidth is shared, broad logging where it is not.
 - **Closed loop during capture:** see methodology/data-quality.
 

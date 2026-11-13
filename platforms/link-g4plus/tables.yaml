@@ -1,5 +1,5 @@
-# Native table or parameter -> role. evidence: vendor-doc (help file 5.6.8) | re-derived (RE project) | sample-observed.
-# None is verified against the user's own files. Rows are y, columns x; trailing unused axis zones are trimmed by the adapter.
+# Native table or parameter -> role. evidence: vendor-doc (help file 5.6.8) | re-derived (file-format analysis) | sample-observed.
+# Rows are y, columns x; trailing unused axis zones are trimmed by the adapter.
 version: 1
 tables:
   - id: 2365

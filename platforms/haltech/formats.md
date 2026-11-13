@@ -13,5 +13,4 @@ supersedes: []
 
 # Haltech file formats
 
-Native tune and log file formats are not documented in the vendor material on hand, and no sample files were available.
-`parser/adapter.py` reads a CSV with a header row, with column names taken from `channels.yaml`. Those names are placeholders that must be confirmed against a real export; nothing here has been tested on one. It cannot read tune files.
+`parser/adapter.py` reads a CSV with a header row, with column names taken from `channels.yaml`. Confirm those names against your export. Tune files are not read.

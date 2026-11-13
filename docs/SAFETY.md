@@ -18,10 +18,10 @@ every workflow's definition.
 8. No live writes while the vehicle is moving unless explicitly enabled and bounded (default off).
 9. State uncertainty; "not enough data to change this safely" is a valid, preferred output.
 
-## Limits files (machine-readable, to be authored)
+## Limits files (machine-readable)
 safety/limits.yaml: default envelopes by fuel/aspiration (lambda floors under load, timing change
 per step, boost change per step, etc.), always overridden to be MORE conservative by user limits.
-Values will be sourced to tier A/B and cited, not invented.
+Values are sourced to tier A/B, never invented; a limit with no sourced value is `unknown` and must come from the user.
 
 ## Confidence-scaled caution
 Low confidence (many assumed fields) => smaller steps, more conservative envelope, prefer

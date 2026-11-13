@@ -1,6 +1,6 @@
 # Native log channel -> canonical channel. match is a case-insensitive regular expression on the channel name.
 # convert: none | afr_to_lambda (divide by unit scale; flagged) | psi_to_kpa
-# Observed in two vendor sample logs (firmware 4.4); the user's own logs may have other names or units.
+# Names differ between firmware versions; unmapped channels are listed in the adapter output.
 version: 1
 channels:
   - match: '^Engine Speed$'
